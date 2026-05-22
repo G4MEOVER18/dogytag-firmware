@@ -1,0 +1,289 @@
+================================================================================
+  ERFORDERLICHE ANPASSUNGEN: xiao-proto1 (DevEUI: C97DEE474E04FC30)
+  Neues LoRaWAN-Gerät in bestehendes DogyTag-System einbinden
+  Stand: 2026-03-24
+================================================================================
+
+GERAET-PROFIL
+--------------
+  Name/Device-ID : xiao-proto1
+  DevEUI         : C97DEE474E04FC30
+  Typ            : LoRaWAN Prototype (XIAO ESP32-S3)
+  Rolle          : Tracker (analog zu ST-002)
+
+================================================================================
+1. MQTT WEBUI V3 (http://192.168.0.80:8088/)
+================================================================================
+
+Hintergrund:
+  - Broker: 192.168.0.80:1883
+  - Subscribed Topic: dogytag/#  (alle Subtopics werden automatisch erfasst)
+  - Geraete werden AUTOMATISCH erkannt, sobald sie Nachrichten auf
+    dogytag/<device_id>/... publizieren. Keine manuelle Geraete-Registrierung
+    notwendig.
+  - Die App speichert alle empfangenen Nachrichten in einer SQLite-DB.
+
+Anpassungen erforderlich:
+  KEINE automatische Registrierung noetig. Sobald das Geraet "xiao-proto1"
+  MQTT-Nachrichten sendet, erscheint es in der Geraeteubersicht unter
+  device_id = "xiao-proto1".
+
+  Empfohlen: Topic-Regeln fuer Auto-Kategorisierung hinzufuegen.
+  Die bestehenden Regeln decken bereits alle Standard-Subtopics ab:
+
+  Bestehende Regeln (bereits aktiv, gelten automatisch fuer xiao-proto1):
+    dogytag/+/status    -> Kategorie "Status"    (#f59e0b)
+    dogytag/+/telemetry -> Kategorie "Status"    (#f59e0b)
+    dogytag/+/gps       -> Kategorie "GPS"       (#0891b2)
+    dogytag/+/lora      -> Kategorie "LoRa"      (#7c3aed)
+    dogytag/+/ble       -> Kategorie "BLE"       (#2563eb)
+    dogytag/+/wifi      -> Kategorie "WiFi"      (#16a34a)
+    dogytag/+/event     -> Kategorie "Events"    (#dc2626)
+    dogytag/+/debug     -> Kategorie "Debug"     (#000000)
+    dogytag/+/log       -> Kategorie "log"       (#ef0be7)
+
+  -> Alle Wildcardregeln (+) greifen sofort fuer xiao-proto1.
+  -> Keine neuen Regeln erforderlich, ausser xiao-proto1 verwendet
+     abweichende Subtopics (z.B. /cmd, /ack - diese sind aktuell NICHT
+     kategorisiert und erscheinen als "Ohne Kategorie").
+
+  Optional: Cmd/ACK-Regeln hinzufuegen falls gewuenscht:
+    Muster: dogytag/+/cmd    -> neue Kategorie "Commands" (Farbe: #6b7280)
+    Muster: dogytag/+/ack    -> neue Kategorie "ACK"      (Farbe: #10b981)
+    API-Call (POST http://192.168.0.80:8088/api/topic-rules):
+      { "pattern": "dogytag/+/cmd", "category_id": <neue_id> }
+      { "pattern": "dogytag/+/ack", "category_id": <neue_id> }
+
+================================================================================
+2. DOGYTAG ADMIN CONTROL PANEL (http://192.168.0.21:3099/)
+================================================================================
+
+Hintergrund:
+  - Node.js/Express-Server, Powered-by: Express
+  - WebSocket-basierte Echtzeit-Updates (ws://<host>/)
+  - MQTT-Konfiguration: mqtt://127.0.0.1:1883 (localhost-Verweis!)
+    ACHTUNG: Der Admin-Server laeuft auf 192.168.0.21 und verbindet sich
+    intern via 127.0.0.1:1883 zum Broker auf diesem Host. Der Broker
+    unter 192.168.0.80:1883 ist ein SEPARATER Broker.
+    Derzeit: broker.connected = false (ECONNREFUSED 127.0.0.1:1883)
+    -> Der lokale MQTT-Broker auf 192.168.0.21 muss laufen oder die
+       Konfiguration muss auf 192.168.0.80:1883 umgestellt werden.
+
+  - Topic-Schema: dogytag/<deviceId>/<type>
+  - Command-Topic:  dogytag/<deviceId>/cmd
+  - ACK-Topic:      dogytag/<deviceId>/ack
+  - topicRoot: "dogytag"
+
+Geraete-Erkennung:
+  Geraete werden dynamisch aus eingehenden MQTT-Nachrichten extrahiert
+  (state.data.devices Array). Kein statisches Device-Registry vorhanden.
+  -> xiao-proto1 erscheint automatisch sobald MQTT-Nachrichten ankommen.
+
+Anpassungen erforderlich:
+  A) MQTT-Broker-Verbindung reparieren (KRITISCH - aktuell broken):
+     Derzeit verbindet sich der Admin zu mqtt://127.0.0.1:1883
+     und erhaelt ECONNREFUSED. Zwei Optionen:
+       Option 1: Mosquitto (oder anderen Broker) auf 192.168.0.21 starten
+                 und sicherstellen, dass dieser Nachrichten von 192.168.0.80
+                 bridged oder selbst empfaengt.
+       Option 2: Admin-Server-Konfiguration aendern auf
+                 mqtt://192.168.0.80:1883 (den aktiven Broker)
+     -> Ohne diese Verbindung zeigt der Admin keine Geraete und kann
+        keine Befehle senden.
+
+  B) uiLinks korrigieren (derzeit 127.0.0.1:8080, sollte 192.168.0.80:8088):
+     Aktuelle Konfiguration:
+       "dashboard": "http://127.0.0.1:8080/"
+       "map":       "http://127.0.0.1:8080/#map"
+       "events":    "http://127.0.0.1:8080/#events"
+       "raw":       "http://127.0.0.1:8080/#raw"
+     Korrekte Werte (falls MQTT WebUI V3 unter 192.168.0.80:8088 lauft):
+       "dashboard": "http://192.168.0.80:8088/"
+       "map":       "http://192.168.0.80:8088/#map"
+       "events":    "http://192.168.0.80:8088/#events"
+       "raw":       "http://192.168.0.80:8088/#raw"
+
+  C) xiao-proto1 selbst (nach MQTT-Fix automatisch erkannt):
+     Das Geraet taucht nach dem ersten MQTT-Publish automatisch in der
+     Geraetekarte und -tabelle auf. Keine Konfiguration noetig.
+
+================================================================================
+3. MQTT-TOPIC-STRUKTUR (fuer xiao-proto1 Firmware)
+================================================================================
+
+Das Geraet MUSS folgende Topic-Struktur verwenden:
+
+  Publish (Geraet -> Broker):
+    dogytag/xiao-proto1/status      Geraetestatus, Heartbeat
+    dogytag/xiao-proto1/lora        LoRa-Radiostatistiken (RSSI, SNR, etc.)
+    dogytag/xiao-proto1/gps         GPS-Positionsdaten
+    dogytag/xiao-proto1/telemetry   Telemetrie (Batterie, Uptime, etc.)
+    dogytag/xiao-proto1/log         Log-Nachrichten
+    dogytag/xiao-proto1/event       Ereignisse (LOST, GEOFENCE, etc.)
+    dogytag/xiao-proto1/ble         BLE-Scandaten
+    dogytag/xiao-proto1/wifi        WiFi-Scandaten
+    dogytag/xiao-proto1/ack         ACK auf empfangene Befehle
+
+  Subscribe (Geraet empfaengt Befehle):
+    dogytag/xiao-proto1/cmd         Befehle vom Admin
+
+  Payload-Format (JSON, Referenz ST-002/lora):
+    {
+      "device_id": "xiao-proto1",
+      "timestamp": <unix_timestamp_sekunden>,
+      "rssi": <int>,
+      "snr": <float>,
+      "gateway": "gateway01",
+      "counter": <int>,
+      "battery_mv": <int>
+    }
+
+  Payload-Format Status (Referenz gateway01/status):
+    {
+      "device_id": "xiao-proto1",
+      "timestamp": <unix_timestamp>,
+      "state": "online",
+      "mode": "NORMAL",
+      "wifi_rssi": <int>,
+      "uptime_s": <int>
+    }
+
+  Command-Payload-Format (was der Admin sendet):
+    {
+      "protocolVersion": "v1",
+      "messageId": "manual-<timestamp>",
+      "timestamp": "<ISO8601>",
+      "source": "admin-panel",
+      "target": "xiao-proto1",
+      "requiresAck": true,
+      "priority": "normal",
+      "ttl": 60,
+      "commandId": "<COMMAND>",
+      "params": { ... }
+    }
+
+  Bekannte commandIds (vom Admin unterstuetzt):
+    REQUEST_STATUS
+    SET_PROFILE          (params: { "profile": "TEST" | "PRODUCTION" })
+    TRIGGER_STATE        (params: { "state": "LOST" | "RECOVERY" })
+    TRIGGER_GPS          (params: { "durationSec": 60 })
+    FORCE_LORAWAN_JOIN
+    SET_WAKE_INTERVAL    (params: { "seconds": 30 })
+    SET_WIFI_CREDENTIALS (params: { "ssid": "", "password": "" })
+    REBOOT_DEVICE
+
+================================================================================
+4. BESTEHENDE GERAETE (Referenz)
+================================================================================
+
+  Device-ID   | Typ       | Subtopics bekannt      | Letzter Kontakt
+  ------------|-----------|------------------------|------------------------
+  gateway01   | GATEWAY   | status, telemetry      | 2026-03-24 19:16 UTC
+  ST-002      | Tracker   | cmd, gps, log, lora    | 2026-03-22 15:37 UTC
+  tracker01   | Tracker   | event, gps, status     | 2026-03-19 15:57 UTC
+  (+ 9 Testgeraete AAAAAA..ST-AAA mit nur /lora, alle offline)
+
+================================================================================
+5. ZUSAMMENFASSUNG DER AKTIONSPUNKTE
+================================================================================
+
+  [  ] 1. DogyTag Admin: MQTT-Broker-URL auf erreichbaren Broker setzen
+           (mqtt://127.0.0.1:1883 -> mqtt://192.168.0.80:1883 oder lokal)
+
+  [  ] 2. DogyTag Admin: uiLinks-URLs auf http://192.168.0.80:8088 korrigieren
+
+  [  ] 3. xiao-proto1 Firmware: device_id = "xiao-proto1" fest konfigurieren
+
+  [  ] 4. xiao-proto1 Firmware: Topics nach Schema dogytag/xiao-proto1/<type>
+           publizieren (Broker: 192.168.0.80:1883)
+
+  [  ] 5. xiao-proto1 Firmware: dogytag/xiao-proto1/cmd subscriben und
+           Command-Payloads (commandId-basiert) verarbeiten
+
+  [  ] 6. MQTT WebUI V3: Keine Aktion noetig - xiao-proto1 erscheint
+           automatisch nach erstem Publish. Alle Topic-Regeln greifen
+           bereits durch Wildcards (+).
+
+  [  ] 7. Optional: Kategorien "Commands" und "ACK" in MQTT WebUI V3
+           anlegen und Regeln dogytag/+/cmd sowie dogytag/+/ack hinzufuegen.
+
+================================================================================
+Ende des Dokuments
+================================================================================
+
+================================================================================
+6. TTN GERAETE-REGISTRIERUNG (ERFORDERLICH fuer OTAA Join)
+================================================================================
+
+Status: OTAA Join schlaegt aktuell fehl mit RADIOLIB_ERR_NO_JOIN_ACCEPT (-1116)
+Ursache: xiao-proto1 ist noch nicht in TTN Application "dogytag-v1" registriert.
+
+Geraete-Daten fuer TTN:
+  Device ID  : xiao-proto1
+  DevEUI     : C9 7D EE 47 4E 04 FC 30  (MSB-first)
+  JoinEUI    : 00 00 00 00 00 00 00 00
+  AppKey     : 54 4B 16 17 FE 40 1B A1 D8 4A 57 C9 BF 0C 9B A5
+  LoRaWAN    : 1.0.3 Rev A
+  Region     : EU863-870 (EU868)
+  Activation : OTAA
+
+Registrierung ueber TTN Console (manuell):
+  1. https://eu1.cloud.thethings.network/console/applications/dogytag-v1/devices/add
+  2. "Register end device manually" waehlen
+  3. Felder ausfuellen:
+     - Brand/Model: beliebig (z.B. "Other")
+     - Hardware version: beliebig
+     - Profile (Region): EU_863_870
+     - Frequency plan: Europe 863-870 MHz (SF9 for RX2)
+     - LoRaWAN version: LoRaWAN 1.0.3
+     - Regional parameters: RP001 Regional Parameters 1.0.3 revision A
+     - JoinEUI: 0000000000000000
+     - DevEUI: C97DEE474E04FC30
+     - AppKey: 544B1617FE401BA1D84A57C9BF0C9BA5
+     - Device ID: xiao-proto1
+
+Registrierung ueber TTN HTTP API v3 (mit API-Key):
+  POST https://eu1.cloud.thethings.network/api/v3/applications/dogytag-v1/devices
+  Header: Authorization: Bearer <API_KEY>
+          Content-Type: application/json
+  Body:
+  {
+    "end_device": {
+      "ids": {
+        "device_id": "xiao-proto1",
+        "dev_eui": "C97DEE474E04FC30",
+        "join_eui": "0000000000000000"
+      },
+      "name": "XIAO ESP32S3 Proto 1",
+      "lorawan_version": "1.0.3",
+      "lorawan_phy_version": "1.0.3-a",
+      "frequency_plan_id": "EU_863_870_TTN"
+    }
+  }
+  
+  Dann AppKey separat setzen:
+  PUT https://eu1.cloud.thethings.network/api/v3/applications/dogytag-v1/devices/xiao-proto1/join-server
+  Header: Authorization: Bearer <API_KEY>
+  Body:
+  {
+    "end_device": {
+      "ids": {
+        "device_id": "xiao-proto1",
+        "dev_eui": "C97DEE474E04FC30",
+        "join_eui": "0000000000000000"
+      },
+      "root_keys": {
+        "app_key": {
+          "key": "544B1617FE401BA1D84A57C9BF0C9BA5"
+        }
+      }
+    },
+    "field_mask": { "paths": ["root_keys.app_key"] }
+  }
+
+API-Key erstellen (falls noch kein Key vorhanden):
+  TTN Console -> Applications -> dogytag-v1 -> API keys -> + Add API key
+  Required rights: "Create devices", "Edit basic device info", 
+                   "View devices in applications that I have linked"
+
+================================================================================
