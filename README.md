@@ -252,3 +252,4 @@ Copyright (c) 2024–2026 G4MEOVER18
 Wenn dieses Projekt deiner eigenen Forschung geholfen hat:
 
 **Bitcoin:** `39vZWmnUwDReQ15BwqQXzyqVQ6U8LardEf`
+**PayPal:** [paypal.me/Freakbank1](https://paypal.me/Freakbank1)
