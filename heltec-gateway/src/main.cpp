@@ -92,7 +92,7 @@ static bool enqueuePendingCmd(const char* devId, const char* cmdIdStr,
             pendingCmds[i].queuedAt  = millis();
             pendingCmds[i].ttlMs     = ttlSec * 1000UL;
             pendingCmds[i].active    = true;
-            Serial.printf("[CMD] Queued '%s' fuer %s (TTL=%lus)\n",
+            Serial.printf("[CMD] Queued '%s' für %s (TTL=%lus)\n",
                           cmdName, devId, (unsigned long)ttlSec);
             return true;
         }
@@ -101,7 +101,7 @@ static bool enqueuePendingCmd(const char* devId, const char* cmdIdStr,
     return false;
 }
 
-// Naechsten Pending Command fuer Device holen (NULL wenn keiner)
+// Naechsten Pending Command für Device holen (NULL wenn keiner)
 static PendingCmd* getPendingCmd(const char* devId) {
     for (int i = 0; i < PENDING_CMD_SLOTS; i++) {
         if (pendingCmds[i].active &&
@@ -123,7 +123,7 @@ static void expirePendingCmds() {
     for (int i = 0; i < PENDING_CMD_SLOTS; i++) {
         if (pendingCmds[i].active &&
             (now - pendingCmds[i].queuedAt > pendingCmds[i].ttlMs)) {
-            Serial.printf("[CMD] TTL abgelaufen: '%s' fuer %s\n",
+            Serial.printf("[CMD] TTL abgelaufen: '%s' für %s\n",
                           pendingCmds[i].cmdName, pendingCmds[i].deviceId);
             pendingCmds[i].active = false;
         }
