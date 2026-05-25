@@ -1,7 +1,7 @@
 ## v2.6.1
 - kleiner Konsolenschritt: neue Befehle `version`, `uptime`, `console`
 - neue Schnellstart-Doku für serielle Befehle
-- keine Architekturveraenderung
+- keine Architekturveränderung
 
 # Changelog
 
