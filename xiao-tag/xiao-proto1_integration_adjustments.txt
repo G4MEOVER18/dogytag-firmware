@@ -28,10 +28,10 @@ Anpassungen erforderlich:
   MQTT-Nachrichten sendet, erscheint es in der Geraeteubersicht unter
   device_id = "xiao-proto1".
 
-  Empfohlen: Topic-Regeln fuer Auto-Kategorisierung hinzufuegen.
+  Empfohlen: Topic-Regeln für Auto-Kategorisierung hinzufuegen.
   Die bestehenden Regeln decken bereits alle Standard-Subtopics ab:
 
-  Bestehende Regeln (bereits aktiv, gelten automatisch fuer xiao-proto1):
+  Bestehende Regeln (bereits aktiv, gelten automatisch für xiao-proto1):
     dogytag/+/status    -> Kategorie "Status"    (#f59e0b)
     dogytag/+/telemetry -> Kategorie "Status"    (#f59e0b)
     dogytag/+/gps       -> Kategorie "GPS"       (#0891b2)
@@ -42,7 +42,7 @@ Anpassungen erforderlich:
     dogytag/+/debug     -> Kategorie "Debug"     (#000000)
     dogytag/+/log       -> Kategorie "log"       (#ef0be7)
 
-  -> Alle Wildcardregeln (+) greifen sofort fuer xiao-proto1.
+  -> Alle Wildcardregeln (+) greifen sofort für xiao-proto1.
   -> Keine neuen Regeln erforderlich, ausser xiao-proto1 verwendet
      abweichende Subtopics (z.B. /cmd, /ack - diese sind aktuell NICHT
      kategorisiert und erscheinen als "Ohne Kategorie").
@@ -108,7 +108,7 @@ Anpassungen erforderlich:
      Geraetekarte und -tabelle auf. Keine Konfiguration noetig.
 
 ================================================================================
-3. MQTT-TOPIC-STRUKTUR (fuer xiao-proto1 Firmware)
+3. MQTT-TOPIC-STRUKTUR (für xiao-proto1 Firmware)
 ================================================================================
 
 Das Geraet MUSS folgende Topic-Struktur verwenden:
@@ -212,13 +212,13 @@ Ende des Dokuments
 ================================================================================
 
 ================================================================================
-6. TTN GERAETE-REGISTRIERUNG (ERFORDERLICH fuer OTAA Join)
+6. TTN GERAETE-REGISTRIERUNG (ERFORDERLICH für OTAA Join)
 ================================================================================
 
 Status: OTAA Join schlaegt aktuell fehl mit RADIOLIB_ERR_NO_JOIN_ACCEPT (-1116)
 Ursache: xiao-proto1 ist noch nicht in TTN Application "dogytag-v1" registriert.
 
-Geraete-Daten fuer TTN:
+Geraete-Daten für TTN:
   Device ID  : xiao-proto1
   DevEUI     : C9 7D EE 47 4E 04 FC 30  (MSB-first)
   JoinEUI    : 00 00 00 00 00 00 00 00
@@ -227,7 +227,7 @@ Geraete-Daten fuer TTN:
   Region     : EU863-870 (EU868)
   Activation : OTAA
 
-Registrierung ueber TTN Console (manuell):
+Registrierung über TTN Console (manuell):
   1. https://eu1.cloud.thethings.network/console/applications/dogytag-v1/devices/add
   2. "Register end device manually" waehlen
   3. Felder ausfuellen:
@@ -242,7 +242,7 @@ Registrierung ueber TTN Console (manuell):
      - AppKey: 544B1617FE401BA1D84A57C9BF0C9BA5
      - Device ID: xiao-proto1
 
-Registrierung ueber TTN HTTP API v3 (mit API-Key):
+Registrierung über TTN HTTP API v3 (mit API-Key):
   POST https://eu1.cloud.thethings.network/api/v3/applications/dogytag-v1/devices
   Header: Authorization: Bearer <API_KEY>
           Content-Type: application/json
