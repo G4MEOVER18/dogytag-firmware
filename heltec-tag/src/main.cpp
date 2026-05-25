@@ -1305,9 +1305,9 @@ void setup()
         }
 
         if (bytesTotal == 0) {
-            Serial.println("[GPS] WARNUNG: 0 Bytes empfangen – Verkabelung pruefen!");
+            Serial.println("[GPS] WARNUNG: 0 Bytes empfangen – Verkabelung prüfen!");
             Serial.printf("      GPIO%d (RX) muss mit NEO-M9N TX verbunden sein.\n", GPS_RX_PIN);
-            Serial.printf("      3.3V und GND pruefen.\n");
+            Serial.printf("      3.3V und GND prüfen.\n");
         } else if (sentencesCnt == 0) {
             Serial.printf("[GPS] %lu Bytes, aber kein NMEA '$' – falsches Baud? (aktuell %lu)\n",
                           bytesTotal, (unsigned long)GPS_BAUD);
@@ -1371,7 +1371,7 @@ void setup()
     int16_t rc = radio->begin();
     if (rc != RADIOLIB_ERR_NONE && rc != RADIOLIB_ERR_CHIP_NOT_FOUND) {
         Serial.printf("[ERROR] SX1262 begin: %d\n", rc);
-        drawStatus("SX1262 Fehler!", ("Code: " + String(rc)).c_str(), "SPI Pins pruefen");
+        drawStatus("SX1262 Fehler!", ("Code: " + String(rc)).c_str(), "SPI Pins prüfen");
         while (true) { digitalWrite(STATUS_LED, !digitalRead(STATUS_LED)); delay(500); }
     }
     Serial.println("[LORA] SX1262 OK");
