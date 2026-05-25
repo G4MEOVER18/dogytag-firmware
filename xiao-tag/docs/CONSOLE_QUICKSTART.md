@@ -1,6 +1,6 @@
 # Console quickstart
 
-Kleiner Diagnose-Schritt fuer den seriellen Monitor.
+Kleiner Diagnose-Schritt für den seriellen Monitor.
 
 ## Befehle
 - `help`
