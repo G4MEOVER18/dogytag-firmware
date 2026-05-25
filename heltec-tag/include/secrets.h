@@ -18,7 +18,7 @@
 #define LORAWAN_APPKEY  { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
                           0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }
 
-// Raw-LoRa Tracker-ID (fuer NEAR_FIND Beacon, max 6 Zeichen)
+// Raw-LoRa Tracker-ID (für NEAR_FIND Beacon, max 6 Zeichen)
 #define TRACKER_ID  "ST-001"
 
 // === WiFi (vorbereitet, noch nicht aktiv – WIFI_ENABLED 0) ===
@@ -32,7 +32,7 @@
 #define MQTT_USER  "REPLACE_MQTT_USER"
 #define MQTT_PASS  "REPLACE_MQTT_PASSWORD"
 
-// === Device Identity (fuer spaeteres MQTT) ===
+// === Device Identity (für spaeteres MQTT) ===
 #define DEVICE_ID  "ST-001"
 #define CLIENT_ID  "dogytag-ST-001"
 
