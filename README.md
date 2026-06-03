@@ -247,6 +247,27 @@ Copyright (c) 2024–2026 G4MEOVER18
 
 ---
 
+## WebUI Screenshots
+
+Die folgenden Screenshots zeigen die lokalen Management-WebUIs des DogyTag-Systems mit Live-Gerätedaten (6 Geräte: ST-001, ST-002, ST-003, ST-P01, AB02A-3, AB02A-4).
+
+### Unified Dashboard (Port 8080) — MQTT + REST + WebSocket
+| Übersicht | Geräteliste | Karte | Raw MQTT |
+|---|---|---|---|
+| ![Overview](docs/screenshots/webui-unified-dashboard.png) | ![Devices](docs/screenshots/webui-unified-devices.png) | ![Map](docs/screenshots/webui-unified-map.png) | ![Raw](docs/screenshots/webui-unified-raw.png) |
+
+### DogyTag Website (Port 8090) — Produkt-Website + Owner-Portal
+| Home | Registrierung | Finder-Seite |
+|---|---|---|
+| ![Home](docs/screenshots/webui-website-home.png) | ![Register](docs/screenshots/webui-website-register.png) | ![Finder](docs/screenshots/webui-website-finder.png) |
+
+### Admin Panel (Port 3099) & MQTT WebUI v3 (Port 8088)
+| Admin Dashboard | Admin Geräte | Admin Raw | MQTT Home | MQTT Geräte | MQTT Nachrichten |
+|---|---|---|---|---|---|
+| ![Admin](docs/screenshots/webui-admin-dashboard.png) | ![Devices](docs/screenshots/webui-admin-devices.png) | ![Raw](docs/screenshots/webui-admin-raw.png) | ![MQTT](docs/screenshots/webui-mqtt-v3-home.png) | ![Dev](docs/screenshots/webui-mqtt-v3-devices.png) | ![Msg](docs/screenshots/webui-mqtt-v3-messages.png) |
+
+---
+
 ## Support / Donations
 
 Wenn dieses Projekt deiner eigenen Forschung geholfen hat:
