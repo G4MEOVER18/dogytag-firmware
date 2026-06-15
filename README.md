@@ -273,4 +273,6 @@ Die folgenden Screenshots zeigen die lokalen Management-WebUIs des DogyTag-Syste
 Wenn dieses Projekt deiner eigenen Forschung geholfen hat:
 
 **Bitcoin:** `39vZWmnUwDReQ15BwqQXzyqVQ6U8LardEf`
+
+**Kontakt:** [g4me.over.18@gmail.com](mailto:g4me.over.18@gmail.com)
 **PayPal:** [paypal.me/Freakbank1](https://paypal.me/Freakbank1)
