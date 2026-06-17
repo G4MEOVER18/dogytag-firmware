@@ -1,0 +1,132 @@
+Processing heltec_wifi_lora_32_V3 (platform: espressif32; board: heltec_wifi_lora_32_V3; framework: arduino)
+--------------------------------------------------------------------------------
+Tool Manager: Installing espressif/toolchain-xtensa-esp32s3 @ 8.4.0+2021r2-patch5
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: toolchain-xtensa-esp32s3@8.4.0+2021r2-patch5 has been installed!
+Tool Manager: Installing espressif/toolchain-riscv32-esp @ 8.4.0+2021r2-patch5
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: toolchain-riscv32-esp@8.4.0+2021r2-patch5 has been installed!
+Tool Manager: Installing platformio/framework-arduinoespressif32 @ ~3.20017.0
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: framework-arduinoespressif32@3.20017.241212+sha.dcc1105b has been installed!
+Library Manager: Installing adafruit/Adafruit SSD1306 @ ^2.5.11
+Downloading 0% 10% 20% 30%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Library Manager: Adafruit SSD1306@2.5.17 has been installed!
+Library Manager: Resolving dependencies...
+Library Manager: Installing Adafruit GFX Library
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Library Manager: Adafruit GFX Library@1.12.6 has been installed!
+Library Manager: Resolving dependencies...
+Library Manager: Installing Adafruit BusIO
+Downloading 0% 10% 20% 30%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Library Manager: Adafruit BusIO@1.17.4 has been installed!
+Library Manager: Installing jgromes/RadioLib @ ^6.6.0
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Library Manager: RadioLib@6.6.0 has been installed!
+Library Manager: Installing mikalhart/TinyGPSPlus @ ^1.0.3
+Downloading 0% 10% 20% 30% 40% 50%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Library Manager: TinyGPSPlus@1.1.0 has been installed!
+Library Manager: Installing h2zero/NimBLE-Arduino @ ^1.4.2
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Library Manager: NimBLE-Arduino@1.4.3 has been installed!
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/heltec_wifi_lora_32_V3.html
+PLATFORM: Espressif 32 (7.0.1+sha.87cbed0) > Heltec WiFi LoRa 32 (V3)
+HARDWARE: ESP32S3 240MHz, 320KB RAM, 8MB Flash
+DEBUG: Current (cmsis-dap) External (cmsis-dap, esp-bridge, esp-builtin, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - framework-arduinoespressif32 @ 3.20017.241212+sha.dcc1105b 
+ - tool-esptoolpy @ 2.41100.0 (4.11.0) 
+ - toolchain-riscv32-esp @ 8.4.0+2021r2-patch5 
+ - toolchain-xtensa-esp32s3 @ 8.4.0+2021r2-patch5
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 39 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- Adafruit SSD1306 @ 2.5.17
+|-- Adafruit GFX Library @ 1.12.6
+|-- RadioLib @ 6.6.0
+|-- TinyGPSPlus @ 1.1.0
+|-- NimBLE-Arduino @ 1.4.3
+|-- Preferences @ 2.0.0
+|-- SPI @ 2.0.0
+|-- WiFi @ 2.0.0
+|-- Wire @ 2.0.0
+Building in release mode
+Compiling .pio\build\heltec_wifi_lora_32_V3\src\main.cpp.o
+Building .pio\build\heltec_wifi_lora_32_V3\bootloader.bin
+Generating partitions .pio\build\heltec_wifi_lora_32_V3\partitions.bin
+esptool.py v4.11.0
+Creating esp32s3 image...
+Merged 1 ELF section
+Successfully created esp32s3 image.
+Compiling .pio\build\heltec_wifi_lora_32_V3\lib8d3\Wire\Wire.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\lib483\SPI\SPI.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\lib882\Adafruit BusIO\Adafruit_BusIO_Register.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\lib882\Adafruit BusIO\Adafruit_GenericDevice.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\lib882\Adafruit BusIO\Adafruit_I2CDevice.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\lib882\Adafruit BusIO\Adafruit_SPIDevice.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\liba10\Adafruit GFX Library\Adafruit_GFX.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\liba10\Adafruit GFX Library\Adafruit_GrayOLED.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\liba10\Adafruit GFX Library\Adafruit_SPITFT.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\liba10\Adafruit GFX Library\glcdfont.c.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libd82\Adafruit SSD1306\Adafruit_SSD1306.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\ArduinoHal.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\Hal.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\Module.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\CC1101\CC1101.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\LLCC68\LLCC68.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\LR11x0\LR1110.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\LR11x0\LR1120.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\LR11x0\LR1121.cpp.o
+Archiving .pio\build\heltec_wifi_lora_32_V3\lib483\libSPI.a
+Archiving .pio\build\heltec_wifi_lora_32_V3\lib882\libAdafruit BusIO.a
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\LR11x0\LR11x0.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\RF69\RF69.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\SX123x\SX1231.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\SX123x\SX1233.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\SX126x\STM32WLx.cpp.o
+Archiving .pio\build\heltec_wifi_lora_32_V3\lib8d3\libWire.a
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\SX126x\STM32WLx_Module.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\SX126x\SX1261.cpp.o
+Archiving .pio\build\heltec_wifi_lora_32_V3\libd82\libAdafruit SSD1306.a
+Indexing .pio\build\heltec_wifi_lora_32_V3\libd82\libAdafruit SSD1306.a
+Indexing .pio\build\heltec_wifi_lora_32_V3\lib483\libSPI.a
+Indexing .pio\build\heltec_wifi_lora_32_V3\lib8d3\libWire.a
+Indexing .pio\build\heltec_wifi_lora_32_V3\lib882\libAdafruit BusIO.a
+Archiving .pio\build\heltec_wifi_lora_32_V3\liba10\libAdafruit GFX Library.a
+Indexing .pio\build\heltec_wifi_lora_32_V3\liba10\libAdafruit GFX Library.a
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\SX126x\SX1262.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\SX126x\SX1268.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\SX126x\SX126x.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\SX127x\SX1272.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\SX127x\SX1273.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\SX127x\SX1276.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\SX127x\SX1277.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\SX127x\SX1278.cpp.o
+Compiling .pio\build\heltec_wifi_lora_32_V3\libab2\RadioLib\modules\SX127x\SX1279.cpp.o
+In file included from src/main.cpp:49:
+src/main.cpp: In function 'void setup()':
+include/secrets.h:12:25: error: unable to find numeric literal operator 'operator""xREPLACE_DEV_EUI_UINT64ULL'
+ #define LORAWAN_DEVEUI  0xREPLACE_DEV_EUI_UINT64ULL
+                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+include/secrets.h:12:25: note: in definition of macro 'LORAWAN_DEVEUI'
+ #define LORAWAN_DEVEUI  0xREPLACE_DEV_EUI_UINT64ULL
+                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+include/secrets.h:12:25: error: unable to find numeric literal operator 'operator""xREPLACE_DEV_EUI_UINT64ULL'
+ #define LORAWAN_DEVEUI  0xREPLACE_DEV_EUI_UINT64ULL
+                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+include/secrets.h:12:25: note: in definition of macro 'LORAWAN_DEVEUI'
+ #define LORAWAN_DEVEUI  0xREPLACE_DEV_EUI_UINT64ULL
+                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+*** [.pio\build\heltec_wifi_lora_32_V3\src\main.cpp.o] Error 1
+========================= [FAILED] Took 86.64 seconds =========================
