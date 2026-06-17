@@ -3,7 +3,7 @@
 // Heltec WiFi LoRa 32 v3 (SX1262, 868 MHz EU)
 // TTN Application: dogytag-v1 | Device: heltec-lora32v3-tag
 // LoRaWAN 1.0.3 OTAA | EU868 | RadioLib 6.6.0
-// MAC: ac:a7:04:09:43:f0 | DevEUI: ACA704FFFE0943F0
+// MAC: <DEINE-MAC> | DevEUI: <DEINE-DEVEUI>
 //
 // Dual-Mode:
 //   - LoRaWAN OTAA → TTN alle 30s (NORMAL tracking)

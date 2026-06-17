@@ -40,3 +40,13 @@ desktop.ini
 *.bak
 *.orig
 *~
+
+# Lokale Secrets (niemals committen – nur *.example.h)
+**/include/secrets.h
+**/src/secrets.h
+**/config/secrets.local.h
+
+# Release-Artefakte + Build-Logs
+release-bins/
+*.log
+build.log
